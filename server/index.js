@@ -33,6 +33,16 @@ app.use((req, res, next) => {
    next();
 });
 
+app.post('/api/newUser', (req, res, next) => {
+    const newUser = {...req.body, prfile_pic: `https://robohash.org/${req.body.username}`};
+    req.db.Users.insert(newUser)
+        .then(newUser => res.status(201).send(newUser))
+        .catch(err => {
+            console.warn(err); 
+            next({message: 'internal server error' })
+        })
+})
+
 app.use((err, req, res, next) => {
     res.status(500).send(err);
 })
