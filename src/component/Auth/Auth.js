@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Auth extends { Component} {
+class Auth extends Component {
 
     render(){
         return(
             <div>
                 Auth
             </div>
-        )
+        );
     }
 }
 
