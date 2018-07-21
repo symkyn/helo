@@ -43,6 +43,17 @@ app.post('/api/newUser', (req, res, next) => {
         })
 })
 
+app.post('/api/login', (req, res, next) => {
+    const loginUN = req.body.username;
+    console.log(req.body)
+    req.db.user(loginUN)
+        .then(result => res.status(200).send(result[0]))
+        .catch(err => {
+            console.warn(err); 
+            next({message: 'internal server error' })
+        })
+})
+
 app.use((err, req, res, next) => {
     res.status(500).send(err);
 })

@@ -11,6 +11,7 @@ class Auth extends Component {
         }
         this.handleChange=this.handleChange.bind(this);
         this.register=this.register.bind(this);
+        this.login=this.login.bind(this);
     }
 
     handleChange(e) {
@@ -20,14 +21,13 @@ class Auth extends Component {
     }
 
     render(){
-        console.log(this.props);
         return(
             <div className='authorization'>
                 Username:<input name='username' type='text' onChange={(e) => this.handleChange(e)} />
                 <br />
                 Password: <input name='password' type='password' onChange={(e) =>this.handleChange(e)} />
                 <br />
-                <button>login</button>
+                <button onClick={(e)=>this.login(e)}>login</button>
                 <button onClick={(e)=>this.register(e)}>register</button>
             </div>
         );
@@ -37,6 +37,17 @@ class Auth extends Component {
         let newUser=this.state;
         axios.post('/api/newUser', newUser)
             .then(results => {
+                this.props.history.push('/dashboard');
+            })
+            .catch(err => console.warn(err))
+    }
+    
+    login(e) {
+        e.preventDefault();
+        let user = this.state;
+        axios.post('/api/login', user)
+            .then(results => {
+                console.log(results)
                 this.props.history.push('/dashboard');
             })
             .catch(err => console.warn(err))
