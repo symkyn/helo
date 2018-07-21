@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import * as Actions from '../../redux/reducer';
 
-export default function Nav() {
+function Nav(props) {
+    console.log(props)
     return (
         <div>
             <Link to='/dashboard'><button>Home</button></Link>
@@ -10,3 +13,5 @@ export default function Nav() {
         </div>
     )
 }
+
+export default connect(state=>state, Actions)(Nav);
