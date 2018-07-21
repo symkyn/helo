@@ -68,8 +68,12 @@ class Dashboard extends Component {
     }
 
     searchPosts() {
-        axios.get(`/api/posts/${this.props.username}?search=${this.state.searchTerm}&includesSelf=${this.state.includeSelf}`)
-            .then(console.log('worked'))
+        axios.get(`/api/posts/${this.props.id}?search=${this.state.searchTerm}&includesSelf=${this.state.includeSelf}`)
+            .then(results => {
+                this.setState({
+                posts: results.data
+                })
+            })
             .catch(console.log('failed'))
     }
 }

@@ -53,9 +53,30 @@ app.post('/api/login', (req, res, next) => {
         })
 })
 
-app.get('/api/posts/:username', (req, res, next) => {
-    console.log(req.params);
-    console.log(req.query);
+app.get('/api/posts/:id', (req, res, next) => {
+    const { id } = req.params.id;
+    const search = string(req.query.search);
+    console.log(search);
+    if(req.query.includesSelf=='true' && req.query.search == '') {
+        req.db.noQuery()
+            .then(result => res.status(200).send(result))
+            .catch(err => {
+                console.warn(err); 
+                next({message: 'internal server error' })
+            })
+    } else if(req.query.includesSelf=='true' && req.query.search != '') {
+        req.db.searchTerm(search)
+            .then(result => res.status(200).send(result))
+            .catch(err => {
+                console.warn(err); 
+                next({message: 'internal server error' })
+            })
+    } else if(req.query.includesSelf=='false' && req.query.search == '') {
+        console.log('exclude self')
+    } else {
+        console.log('search term and exclude self')
+    }
+    
 })
 
 app.use((err, req, res, next) => {

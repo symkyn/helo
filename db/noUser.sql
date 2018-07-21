@@ -1,1 +1,1 @@
-select * from "Posts" join "Users" on "Posts".author_id = "Users".id where username=$1
+select * from "Posts" join "Users" on "Posts".author_id = "Users".id where "Users".id=$1

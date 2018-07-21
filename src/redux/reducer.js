@@ -1,4 +1,5 @@
 const initialState = {
+    id: 0,
     username: '',
     password: '',
     profile_pic: ''
@@ -14,10 +15,10 @@ function reducer(state=initialState, action) {
     }
 }
 
-export function updateCurrentUser(username, password, profile_pic){
+export function updateCurrentUser(id, username, password, profile_pic){
     return {
         type: UPDATE_CURRENT_USER,
-        payload: {username, password, profile_pic}
+        payload: {id, username, password, profile_pic}
     };
 }
 

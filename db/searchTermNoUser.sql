@@ -1,1 +1,1 @@
-select * from "Posts" join "Users" on "Posts".author_id = "Users".id where title like $1 and username=$2
+select * from "Posts" join "Users" on "Posts".author_id = "Users".id where title like $1 and "Users".id=$2
