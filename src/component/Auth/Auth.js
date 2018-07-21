@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
+
+import * as Actions from '../../redux/reducer';
 
 class Auth extends Component {
     constructor(props){
@@ -37,6 +40,7 @@ class Auth extends Component {
         let newUser=this.state;
         axios.post('/api/newUser', newUser)
             .then(results => {
+                this.props.updateCurrentUser(results.data.username, results.data.password, results.data.prfile_pic)
                 this.props.history.push('/dashboard');
             })
             .catch(err => console.warn(err))
@@ -48,6 +52,7 @@ class Auth extends Component {
         axios.post('/api/login', user)
             .then(results => {
                 console.log(results)
+                this.props.updateCurrentUser(results.data.username, results.data.password, results.data.prfile_pic)
                 this.props.history.push('/dashboard');
             })
             .catch(err => console.warn(err))
@@ -55,4 +60,4 @@ class Auth extends Component {
 }
 
 
-export default Auth;
+export default connect(state=>state, Actions)(Auth);

@@ -7,6 +7,7 @@ function Nav(props) {
     console.log(props)
     return (
         <div>
+            <img src={props.profile_pic} alt='error' />
             <Link to='/dashboard'><button>Home</button></Link>
             <Link to='/new'><button>New Post</button></Link>
             <Link to='/'><button>Logout</button></Link>
