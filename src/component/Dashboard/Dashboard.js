@@ -37,7 +37,7 @@ class Dashboard extends Component {
                             value = {this.state.searchTerm}
                             placeholder='Search by Title' 
                             onChange={this.updateSearch} />
-                    <button onClick={this.searchPosts}>search</button>
+                    <button onClick={(e) => this.searchPosts(e)}>search</button>
                     <button onClick={this.clearSearch}>Reset</button>
                     My Posts: <input type='checkbox' onChange={this.checkBox} checked={this.state.includeSelf} />
                 </div>
@@ -67,7 +67,8 @@ class Dashboard extends Component {
         })
     }
 
-    searchPosts() {
+    searchPosts(e) {
+        e.preventDefault();
         axios.get(`/api/posts/${this.props.id}?search=${this.state.searchTerm}&includesSelf=${this.state.includeSelf}`)
             .then(results => {
                 this.setState({

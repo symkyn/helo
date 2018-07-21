@@ -55,8 +55,6 @@ app.post('/api/login', (req, res, next) => {
 
 app.get('/api/posts/:id', (req, res, next) => {
     const { id } = req.params.id;
-    const search = string(req.query.search);
-    console.log(search);
     if(req.query.includesSelf=='true' && req.query.search == '') {
         req.db.noQuery()
             .then(result => res.status(200).send(result))
@@ -65,7 +63,7 @@ app.get('/api/posts/:id', (req, res, next) => {
                 next({message: 'internal server error' })
             })
     } else if(req.query.includesSelf=='true' && req.query.search != '') {
-        req.db.searchTerm(search)
+        req.db.searchTerm(`%${req.query.search}%`)
             .then(result => res.status(200).send(result))
             .catch(err => {
                 console.warn(err); 
