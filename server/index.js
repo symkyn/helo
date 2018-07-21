@@ -54,7 +54,6 @@ app.post('/api/login', (req, res, next) => {
 })
 
 app.get('/api/posts/:id', (req, res, next) => {
-    // const { id } = req.params.id;
     if(req.query.includesSelf=='true' && req.query.search == '') {
         req.db.noQuery()
             .then(result => res.status(200).send(result))
@@ -77,8 +76,6 @@ app.get('/api/posts/:id', (req, res, next) => {
                 next({message: 'internal server error' })
             })
     } else {
-        console.log(req.query.search);
-        console.log(req.params.id);
         req.db.searchTermNoUser(`%${req.query.search}%`, req.params.id)
             .then(result => res.status(200).send(result))
             .catch(err => {
@@ -88,6 +85,15 @@ app.get('/api/posts/:id', (req, res, next) => {
     }
     
 })
+
+app.get('/api/post/:id', (req, res, next) => {
+    req.db.post(req.params.id)
+        .then(result => res.status(200).send(result[0]))
+        .catch(err => {
+            console.warn(err); 
+            next({message: 'internal server error' })
+        })
+}) 
 
 app.use((err, req, res, next) => {
     res.status(500).send(err);
