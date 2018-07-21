@@ -53,6 +53,11 @@ app.post('/api/login', (req, res, next) => {
         })
 })
 
+app.get('/api/posts/:username', (req, res, next) => {
+    console.log(req.params);
+    console.log(req.query);
+})
+
 app.use((err, req, res, next) => {
     res.status(500).send(err);
 })

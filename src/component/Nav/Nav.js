@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import * as Actions from '../../redux/reducer';
 
 function Nav(props) {
-    console.log(props)
     return (
         <div>
             <img src={props.profile_pic} alt='error' />
