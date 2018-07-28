@@ -76,7 +76,7 @@ class Dashboard extends Component {
                 posts: results.data
                 })
             })
-            .catch(console.log('failed'))
+            .catch(err => console.warn(err))
     }
 }
 

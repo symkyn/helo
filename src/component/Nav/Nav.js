@@ -26,13 +26,14 @@ class Nav extends Component {
                 <img src={this.props.profile_pic} alt='error' />
                 <Link to='/dashboard'><button>Home</button></Link>
                 <Link to='/new'><button>New Post</button></Link>
-                <Link to='/'><button onClick={(e) => this.logout(e)}>Logout</button></Link>
+                <Link to='/'><button onClick={() => this.logout()}>Logout</button></Link>
             </div>
     )}
 
-    logout(e) {
-        e.preventDefault();
+    logout() {
+        
         axios.post('/api/auth/logout')
+            
     }
 }
 

@@ -130,10 +130,8 @@ app.post('/api/post/', (req, res, next) => {
 }) 
 
 app.post('/api/auth/logout', (req, res, next) => {
-    console.log('logout');
     req.session.destroy();
-    console.log(req.session.userid);
-        
+    res.status(200).send('logged out');
 })
 
 app.use((err, req, res, next) => {
