@@ -19,10 +19,11 @@ class Dashboard extends Component {
     }
 
     render(){
+        console.log(this.state.posts);
         const post = this.state.posts.map((p, i) =>
             {
                 return(
-                    <a href={`#/post/${p.id}`} key={`post${i}`}>
+                    <a href={`#/post/${p.post_id}`} key={`post${i}`}>
                     <div>
                         <h2>{p.title}</h2>
                         by: <h4>{p.username}</h4>

@@ -95,6 +95,18 @@ app.get('/api/post/:id', (req, res, next) => {
         })
 }) 
 
+app.post('/api/post/:id', (req, res, next) => {
+    const id = req.params.id;
+    const newPost = {...req.body, author_id: id};
+    req.db.Posts.insert(newPost)
+        .then(result => 
+            res.status(200).send(result))    
+        .catch(err => {
+            console.warn(err); 
+            next({message: 'internal server error' })
+        })
+}) 
+
 app.use((err, req, res, next) => {
     res.status(500).send(err);
 })

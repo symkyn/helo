@@ -8,7 +8,7 @@ class Form extends Component {
 
         this.state={
             title: '',
-            image: '',
+            img: '',
             content: ''
         }
         this.submitPost=this.submitPost.bind(this);
@@ -28,11 +28,11 @@ class Form extends Component {
             <div>
                 Title: <input type='text' name='title' value={this.state.title} onChange={(e) => this.handleChange(e)} />
                 <br />
-                Image: <input type='text' name='image' value={this.state.image} onChange={(e) => this.handleChange(e)} />
+                Image: <input type='text' name='img' value={this.state.img} onChange={(e) => this.handleChange(e)} />
                 <br />
                 Content: <input type='text' name='content' value={this.state.content} onChange={(e) => this.handleChange(e)} />
                 <br />
-                Image Preview: <img src={this.state.image} alt='broken pic' />
+                Image Preview: <img src={this.state.img} alt='broken pic' />
                 <br />
                 <button onClick={this.submitPost}>submit</button>
             </div>
@@ -40,8 +40,10 @@ class Form extends Component {
     }
 
     submitPost(){
-        const newPost= {...this.state, auth_id: this.props.id};
-        console.log(newPost)
+        const newPost= {...this.state};
+        axios.post(`/api/post/${this.props.id}`, newPost)
+            .then(this.props.history.push('/dashboard'))
+            .catch(err => console.warn(err))
     }
 }
 
