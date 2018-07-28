@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {connect} from 'react-redux';
 
 class Dashboard extends Component {
     constructor(props){
@@ -19,7 +18,6 @@ class Dashboard extends Component {
     }
 
     render(){
-        console.log(this.state.posts);
         const post = this.state.posts.map((p, i) =>
             {
                 return(
@@ -72,7 +70,7 @@ class Dashboard extends Component {
 
     searchPosts(e) {
         e.preventDefault();
-        axios.get(`/api/posts/${this.props.id}?search=${this.state.searchTerm}&includesSelf=${this.state.includeSelf}`)
+        axios.get(`/api/posts/?search=${this.state.searchTerm}&includesSelf=${this.state.includeSelf}`)
             .then(results => {
                 this.setState({
                 posts: results.data
@@ -82,4 +80,4 @@ class Dashboard extends Component {
     }
 }
 
-export default connect(state=>state)(Dashboard);
+export default Dashboard;
