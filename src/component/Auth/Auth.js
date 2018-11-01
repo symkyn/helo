@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
+import Button from '../Button/Button';
 import * as Actions from '../../redux/reducer';
 
 class Auth extends Component {
@@ -30,8 +31,8 @@ class Auth extends Component {
                 <br />
                 Password: <input name='password' type='password' onChange={(e) =>this.handleChange(e)} />
                 <br />
-                <button onClick={(e)=>this.login(e)}>login</button>
-                <button onClick={(e)=>this.register(e)}>register</button>
+                <Button onClick={(e)=>this.login(e)}>login</Button>
+                <Button onClick={(e)=>this.register(e)}>register</Button>
             </div>
         );
     }

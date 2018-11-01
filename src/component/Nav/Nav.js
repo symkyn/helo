@@ -11,7 +11,7 @@ class Nav extends Component {
         this.logout = this.logout.bind(this);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         axios.get('/api/auth/me')
         .then(results => {
             this.props.updateCurrentUser(results.data.id, results.data.username, results.data.password, results.data.prfile_pic)
